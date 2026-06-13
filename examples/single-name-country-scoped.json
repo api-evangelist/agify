@@ -1,0 +1,25 @@
+{
+  "summary": "Single name lookup with country scoping",
+  "description": "Predict the age of a person named Michael, scoped to the United States. Country scoping improves accuracy — in testing against 2024 Olympic athlete data it reached 94.35% accuracy.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.agify.io/?name=michael&country_id=US&apikey=YOUR_API_KEY",
+    "headers": {},
+    "curl": "curl \"https://api.agify.io/?name=michael&country_id=US&apikey=YOUR_API_KEY\""
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Rate-Limit-Limit": "2500",
+      "X-Rate-Limit-Remaining": "2498",
+      "X-Rate-Limit-Reset": "1750000000"
+    },
+    "body": {
+      "name": "michael",
+      "age": 58,
+      "count": 41234,
+      "country_id": "US"
+    }
+  }
+}

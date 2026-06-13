@@ -1,0 +1,24 @@
+{
+  "summary": "Single name age lookup",
+  "description": "Predict the age of a single person named Michael using the Agify API.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.agify.io/?name=michael&apikey=YOUR_API_KEY",
+    "headers": {},
+    "curl": "curl \"https://api.agify.io/?name=michael&apikey=YOUR_API_KEY\""
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Rate-Limit-Limit": "2500",
+      "X-Rate-Limit-Remaining": "2499",
+      "X-Rate-Limit-Reset": "1750000000"
+    },
+    "body": {
+      "name": "michael",
+      "age": 65,
+      "count": 298219
+    }
+  }
+}

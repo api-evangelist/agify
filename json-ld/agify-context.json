@@ -1,0 +1,76 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "agify": "https://agify.io/vocab#",
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "age": {
+      "@id": "schema:age",
+      "@type": "xsd:integer"
+    },
+    "count": {
+      "@id": "agify:count",
+      "@type": "xsd:integer",
+      "@comment": "Number of data records supporting the age prediction."
+    },
+    "country_id": {
+      "@id": "schema:addressCountry",
+      "@type": "xsd:string",
+      "@comment": "ISO 3166-1 alpha-2 country code used for prediction scoping."
+    },
+    "error": {
+      "@id": "schema:description",
+      "@type": "xsd:string",
+      "@comment": "Human-readable error message from the API."
+    },
+    "AgePrediction": {
+      "@id": "agify:AgePrediction",
+      "@type": "@id",
+      "@comment": "A prediction of a person's age derived from their first name."
+    },
+    "ErrorResponse": {
+      "@id": "agify:ErrorResponse",
+      "@type": "@id",
+      "@comment": "An error response from the Agify API."
+    },
+    "provider": {
+      "@id": "schema:provider",
+      "@type": "@id"
+    },
+    "Organization": {
+      "@id": "schema:Organization"
+    }
+  },
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://agify.io",
+      "schema:name": "Demografix ApS",
+      "schema:url": "https://agify.io",
+      "schema:email": "info@genderize.io",
+      "schema:description": "Danish company providing name-based demographic prediction APIs: Agify.io (age), Genderize.io (gender), and Nationalize.io (nationality)."
+    },
+    {
+      "@type": "schema:WebAPI",
+      "@id": "https://api.agify.io",
+      "schema:name": "Agify Age Prediction API",
+      "schema:description": "REST API that predicts the age of a person from their first name using statistical data from over 900 million records spanning 195+ countries.",
+      "schema:url": "https://agify.io",
+      "schema:documentation": "https://agify.io/documentation",
+      "provider": {
+        "@id": "https://agify.io"
+      },
+      "schema:version": "1.0.0",
+      "schema:isAccessibleForFree": true,
+      "schema:offers": {
+        "@type": "schema:Offer",
+        "schema:name": "Free Tier",
+        "schema:description": "2,500 name lookups per month at no cost."
+      }
+    }
+  ]
+}

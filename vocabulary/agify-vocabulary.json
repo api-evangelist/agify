@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/agify/vocabulary/agify-vocabulary.json",
+  "title": "Agify API Vocabulary",
+  "description": "Domain vocabulary and term definitions for the Agify age prediction API.",
+  "version": "1.0.0",
+  "terms": [
+    {
+      "term": "age",
+      "definition": "The predicted age in years of a person with the given name, derived from statistical analysis of name-to-age distributions across billions of records. Returns null when insufficient data exists for the name.",
+      "type": "integer",
+      "nullable": true,
+      "unit": "years"
+    },
+    {
+      "term": "count",
+      "definition": "The number of data records used to compute the age prediction for a given name. Higher counts indicate greater statistical confidence in the predicted age.",
+      "type": "integer",
+      "minimum": 0
+    },
+    {
+      "term": "name",
+      "definition": "A person's first name submitted for age prediction. The API applies preprocessing including diacritic normalization and first/last name parsing when the exact name is not in the dataset.",
+      "type": "string"
+    },
+    {
+      "term": "country_id",
+      "definition": "An ISO 3166-1 alpha-2 two-letter country code used to scope age predictions to a specific country. Providing a country code improves prediction accuracy, with testing showing 94.35% accuracy versus global fallback methods.",
+      "type": "string",
+      "format": "iso3166-1-alpha-2",
+      "example": "US"
+    },
+    {
+      "term": "apikey",
+      "definition": "An API authentication key obtained from the Agify dashboard. The same key is shared across Agify.io, Genderize.io, and Nationalize.io. The free tier provides 2,500 name lookups per month.",
+      "type": "string"
+    },
+    {
+      "term": "batch request",
+      "definition": "A single HTTP request that submits up to 10 names simultaneously using array query parameter syntax (name[]=anna&name[]=john). Each name in a batch counts individually toward the monthly allowance.",
+      "maxBatchSize": 10
+    },
+    {
+      "term": "X-Rate-Limit-Limit",
+      "definition": "HTTP response header indicating the total number of name lookups allowed within the current billing period under the current plan.",
+      "type": "response-header",
+      "valueType": "integer"
+    },
+    {
+      "term": "X-Rate-Limit-Remaining",
+      "definition": "HTTP response header indicating how many name lookups remain in the current billing period.",
+      "type": "response-header",
+      "valueType": "integer"
+    },
+    {
+      "term": "X-Rate-Limit-Reset",
+      "definition": "HTTP response header containing a Unix timestamp (seconds since epoch) indicating when the monthly allowance will reset.",
+      "type": "response-header",
+      "valueType": "unix-timestamp"
+    },
+    {
+      "term": "diacritic normalization",
+      "definition": "Preprocessing step applied when a name with accent marks or diacritics is not found in the dataset. The API strips diacritics (e.g., converting é to e) and retries the lookup before returning null.",
+      "type": "process"
+    },
+    {
+      "term": "data coverage",
+      "definition": "The Agify dataset contains over 908 million data rows spanning 195+ countries following ISO 3166-1 alpha-2 standards. Data is sourced from publicly available datasets across the web.",
+      "type": "concept"
+    },
+    {
+      "term": "Demografix ApS",
+      "definition": "The Danish company that operates the Agify.io, Genderize.io, and Nationalize.io name prediction APIs.",
+      "type": "organization"
+    }
+  ]
+}

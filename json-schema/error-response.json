@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/agify/json-schema/error-response.json",
+  "title": "ErrorResponse",
+  "description": "Error response returned by the Agify API when a request cannot be processed.",
+  "type": "object",
+  "properties": {
+    "error": {
+      "type": "string",
+      "description": "Human-readable error message describing the problem with the request.",
+      "examples": [
+        "Missing 'name' parameter.",
+        "Invalid API key.",
+        "Request limit reached. Upgrade to a paid plan for more requests."
+      ]
+    }
+  },
+  "required": ["error"],
+  "additionalProperties": false
+}

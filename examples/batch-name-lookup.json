@@ -1,0 +1,36 @@
+{
+  "summary": "Batch name lookup (up to 10 names)",
+  "description": "Predict ages for multiple names in a single request using array syntax. Each name in a batch counts individually toward the monthly allowance. Maximum 10 names per request.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.agify.io/?name[]=anna&name[]=john&name[]=kim&apikey=YOUR_API_KEY",
+    "headers": {},
+    "curl": "curl \"https://api.agify.io/?name[]=anna&name[]=john&name[]=kim&apikey=YOUR_API_KEY\""
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Rate-Limit-Limit": "2500",
+      "X-Rate-Limit-Remaining": "2495",
+      "X-Rate-Limit-Reset": "1750000000"
+    },
+    "body": [
+      {
+        "name": "anna",
+        "age": 42,
+        "count": 185234
+      },
+      {
+        "name": "john",
+        "age": 55,
+        "count": 412789
+      },
+      {
+        "name": "kim",
+        "age": 38,
+        "count": 67890
+      }
+    ]
+  }
+}

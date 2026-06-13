@@ -1,0 +1,24 @@
+{
+  "summary": "Name not found in dataset",
+  "description": "When a name cannot be matched in the dataset (after attempting diacritic stripping and first/last name parsing), the API returns null for age and 0 for count. This is a successful 200 response, not an error.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.agify.io/?name=xyz123abc&apikey=YOUR_API_KEY",
+    "headers": {},
+    "curl": "curl \"https://api.agify.io/?name=xyz123abc&apikey=YOUR_API_KEY\""
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Rate-Limit-Limit": "2500",
+      "X-Rate-Limit-Remaining": "2494",
+      "X-Rate-Limit-Reset": "1750000000"
+    },
+    "body": {
+      "name": "xyz123abc",
+      "age": null,
+      "count": 0
+    }
+  }
+}

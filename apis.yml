@@ -43,7 +43,8 @@ apis:
       - type: Documentation
         url: https://agify.io/documentation
       - type: OpenAPI
-        url: https://agify.io/documentation/api/reference
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/agify/refs/heads/main/openapi/agify-openapi.json
     contact:
       - FN: Demografix ApS
         email: info@genderize.io
