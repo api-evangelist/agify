@@ -1,0 +1,57 @@
+name: Agify.io Plans and Pricing
+description: Pricing plans for the Agify.io age prediction API provided by Demografix ApS.
+url: https://agify.io/pricing
+plans:
+  - name: Free
+    description: Free tier for prototyping and small research projects. No credit card required.
+    price: 0.00
+    currency: USD
+    billingCycle: monthly
+    requests: 2500
+    requestUnit: names/month
+    features:
+      - Access to age prediction API
+      - Access to Genderize.io and Nationalize.io with same key
+      - No rate limiting on request speed
+      - Country-scoped predictions
+      - Community SDK access
+    limitations:
+      - 2,500 names per month
+      - Returns HTTP 429 after quota exhausted until next billing cycle
+  - name: Standard
+    description: Paid plan for production workloads needing higher volume.
+    price: 60.00
+    currency: USD
+    billingCycle: monthly
+    requests: 250000
+    requestUnit: names/month
+    effectiveRate: "$0.24 per 1,000 names"
+    features:
+      - All three APIs (age, gender, nationality) with one key
+      - No rate limiting on request speed
+      - Email support
+      - Spreadsheet bulk upload tool
+      - Integrations with Zapier, Make, Pipedream
+      - DPA and GDPR compliance documentation
+      - Country-scoped requests
+      - Community SDKs in 12+ languages
+      - No overage fees (429 returned at limit)
+    limitations:
+      - 250,000 names per month cap
+  - name: Enterprise
+    description: Custom plan for very high volume use cases exceeding 25 million names per month.
+    price: custom
+    currency: USD
+    billingCycle: monthly
+    requests: 25000000
+    requestUnit: names/month
+    features:
+      - All Standard plan features
+      - Custom volume above 25 million names/month
+      - Dedicated support
+    contact: info@genderize.io
+notes:
+  - All plans can be cancelled at any time with no penalties
+  - No overage fees; requests beyond the monthly allowance receive HTTP 429 responses
+  - The same API key works across Agify.io, Genderize.io, and Nationalize.io
+  - Free tier requires no credit card

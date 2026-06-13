@@ -1,0 +1,75 @@
+aid: agify
+name: Agify.io
+description: >-
+  Agify.io is a free REST API that predicts the age of a person based on their
+  first name using statistical data from over one billion records spanning 195+
+  countries. The service is provided by Demografix ApS and shares a single API
+  key with the companion Genderize.io and Nationalize.io APIs. The free tier
+  allows 2,500 name lookups per month with no credit card required; paid plans
+  scale up to 250,000+ names per month. Requests support batch processing of
+  up to 10 names and optional country scoping via ISO 3166-1 alpha-2 codes.
+  The API is stateless, cookieless, and GDPR compliant — submitted names are
+  discarded immediately and never stored.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/agify/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Age Prediction
+  - Name Analysis
+  - Demographics
+  - Statistical API
+  - Free API
+apis:
+  - aid: agify:agify-api
+    name: Agify Age Prediction API
+    description: >-
+      REST API that predicts the age of a person from their first name.
+      Accepts single or batched name lookups (up to 10 per request) and
+      optionally scopes predictions to a specific country using ISO 3166-1
+      alpha-2 country codes. Returns predicted age, the name as processed,
+      and the number of data records supporting the prediction. Rate limit
+      headers (X-Rate-Limit-Limit, X-Rate-Limit-Remaining, X-Rate-Limit-Reset)
+      are included in every response.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://agify.io
+    baseURL: https://api.agify.io
+    tags:
+      - Age Prediction
+      - Demographics
+      - Name API
+    properties:
+      - type: Documentation
+        url: https://agify.io/documentation
+      - type: OpenAPI
+        url: https://agify.io/documentation/api/reference
+    contact:
+      - FN: Demografix ApS
+        email: info@genderize.io
+common:
+  - type: Website
+    url: https://agify.io
+  - type: Documentation
+    url: https://agify.io/documentation
+  - type: Pricing
+    url: https://agify.io/pricing
+  - type: Plans
+    url: plans/agify-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/agify-rate-limits.yml
+  - type: FinOps
+    url: finops/agify-finops.yml
+  - type: Authentication
+    url: https://agify.io/register
+  - type: FAQ
+    url: https://agify.io/faq
+  - type: Libraries
+    url: https://agify.io/libraries
+  - type: DataCoverage
+    url: https://agify.io/our-data
+  - type: CaseStudies
+    url: https://agify.io/case-studies
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

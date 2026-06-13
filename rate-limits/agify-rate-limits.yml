@@ -1,0 +1,50 @@
+name: Agify.io Rate Limits
+description: Rate limit policies for the Agify.io age prediction API.
+url: https://agify.io/documentation/api/reference
+rateLimits:
+  - type: Monthly Quota
+    description: Each plan has a fixed monthly allowance of names that can be predicted. Resets each billing cycle.
+    tiers:
+      - plan: Free
+        limit: 2500
+        unit: names/month
+        reset: monthly billing cycle
+      - plan: Standard
+        limit: 250000
+        unit: names/month
+        reset: monthly billing cycle
+      - plan: Enterprise
+        limit: custom
+        unit: names/month
+        reset: monthly billing cycle
+  - type: Request Rate
+    description: There is no per-second or per-minute rate limiting. Requests can be made as fast as needed.
+    limit: none
+    notes: "Per the FAQ: There is no rate limiting — you can make requests as fast as you need."
+  - type: Batch Request Size
+    description: Batch requests using name[] parameters are limited to 10 names per HTTP request.
+    limit: 10
+    unit: names/request
+headers:
+  - name: X-Rate-Limit-Limit
+    description: Total names allowed in the current monthly window for the authenticated API key
+  - name: X-Rate-Limit-Remaining
+    description: Number of names remaining in the current monthly window
+  - name: X-Rate-Limit-Reset
+    description: Seconds until the monthly quota window resets
+errorCodes:
+  - code: 429
+    message: Request limit reached
+    description: Monthly name quota has been exhausted; requests will be accepted again after the billing cycle resets
+  - code: 429
+    message: Request too low to process
+    description: Throttled — retry after a brief wait
+  - code: 401
+    message: Invalid API key
+    description: The provided apikey parameter is not recognized
+  - code: 402
+    message: Subscription not active
+    description: The account subscription is paused, expired, or unpaid
+  - code: 422
+    message: Missing/Invalid name
+    description: No name parameter was provided or it is malformed

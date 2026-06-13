@@ -1,0 +1,39 @@
+name: Agify.io FinOps
+description: Financial operations guidance for managing costs when using the Agify.io age prediction API.
+url: https://agify.io/pricing
+costModel:
+  type: subscription
+  billingCycle: monthly
+  currency: USD
+  tiers:
+    - name: Free
+      monthlyTotal: 0.00
+      includedNames: 2500
+      costPerThousand: 0.00
+    - name: Standard
+      monthlyTotal: 60.00
+      includedNames: 250000
+      costPerThousand: 0.24
+    - name: Enterprise
+      monthlyTotal: custom
+      includedNames: 25000000+
+      costPerThousand: custom
+budgetGuidance:
+  - recommendation: Start with the free tier (2,500 names/month) to validate your use case before committing to a paid plan.
+  - recommendation: Monitor the X-Rate-Limit-Remaining header to track monthly consumption and anticipate when you will exhaust the quota.
+  - recommendation: Use batch requests (up to 10 names per call) to reduce HTTP overhead and improve throughput efficiency.
+  - recommendation: Apply the country_id parameter only when country-specific accuracy is needed; it does not affect pricing but can improve result quality.
+  - recommendation: Because there are no overage fees, budget risk is capped at the plan cost; exceeding quota results in 429 errors rather than surprise charges.
+  - recommendation: The same API key and subscription covers Genderize.io and Nationalize.io, so shared use across all three services counts against the same monthly quota.
+costOptimization:
+  - tip: Cache results locally for names you look up frequently to avoid re-spending quota on repeated lookups.
+  - tip: Deduplicate name lists before calling the API; identical names return identical predictions.
+  - tip: For bulk enrichment projects, use the spreadsheet upload tool (Standard plan) to avoid building custom batching logic.
+  - tip: Process names in batches of 10 to maximize names predicted per HTTP request.
+complianceNotes:
+  - Demografix ApS is a Danish company subject to GDPR; a Data Processing Agreement (DPA) is available on Standard and Enterprise plans.
+  - Names submitted via the API are discarded immediately and not stored, reducing data retention compliance burden.
+  - No IP addresses are logged; cookieless analytics are used on the website.
+contact:
+  billing: info@genderize.io
+  company: Demografix ApS, Eriksvej 30, 4000 Roskilde, Denmark
