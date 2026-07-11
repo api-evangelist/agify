@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/agify-openapi.json
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: apiKey
+  type: apiKey
+  in: query
+  parameter: apikey
+  description: API key obtained from the Agify dashboard. Shared with Genderize.io and Nationalize.io.
+  sources:
+  - openapi/agify-openapi.json
