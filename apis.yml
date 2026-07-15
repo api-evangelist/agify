@@ -49,6 +49,8 @@ apis:
       - FN: Demografix ApS
         email: info@genderize.io
 common:
+  - type: AgenticAccess
+    url: agentic-access/agify-agentic-access.yml
   - type: DomainSecurity
     url: security/agify-domain-security.yml
   - type: Authentication
