@@ -1,0 +1,276 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Agify Age Prediction API",
+    "description": "REST API that predicts the age of a person from their first name using statistical data from over 900 million records spanning 195+ countries. Provided by Demografix ApS. Shares a single API key with Genderize.io and Nationalize.io.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Demografix ApS",
+      "email": "info@genderize.io",
+      "url": "https://agify.io"
+    },
+    "license": {
+      "name": "Proprietary",
+      "url": "https://agify.io/terms"
+    },
+    "termsOfService": "https://agify.io/terms",
+    "x-api-id": "agify:agify-api"
+  },
+  "externalDocs": {
+    "description": "Official Documentation",
+    "url": "https://agify.io/documentation"
+  },
+  "servers": [
+    {
+      "url": "https://api.agify.io",
+      "description": "Production API"
+    }
+  ],
+  "security": [
+    {
+      "apiKey": []
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "predictAge",
+        "summary": "Predict age from name",
+        "description": "Predicts the age of a person from their first name. Accepts a single name or up to 10 names in a batch. Optionally scopes the prediction to a specific country using an ISO 3166-1 alpha-2 country code. An API key is required for all requests.",
+        "tags": ["Age Prediction"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "First name to predict age for. For a single name lookup, provide the name as a string. For batch lookups, use array syntax: name[]=anna&name[]=john (up to 10 names per request).",
+            "required": true,
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "example": "michael"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "maxItems": 10,
+                  "example": ["anna", "john", "kim"]
+                }
+              ]
+            }
+          },
+          {
+            "name": "country_id",
+            "in": "query",
+            "description": "ISO 3166-1 alpha-2 country code to scope the age prediction to a specific country. Providing a country code significantly improves prediction accuracy.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$",
+              "example": "US"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "query",
+            "description": "Your Agify API key. Shared with Genderize.io and Nationalize.io accounts.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful age prediction. Returns a single object for a single name lookup, or an array of objects for batch lookups.",
+            "headers": {
+              "X-Rate-Limit-Limit": {
+                "description": "Total number of name lookups allowed in the current billing period.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "X-Rate-Limit-Remaining": {
+                "description": "Number of name lookups remaining in the current billing period.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "X-Rate-Limit-Reset": {
+                "description": "Unix timestamp (seconds) when the monthly allowance resets.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/AgePrediction"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/AgePrediction"
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "single-name": {
+                    "summary": "Single name lookup",
+                    "value": {
+                      "name": "michael",
+                      "age": 65,
+                      "count": 298219
+                    }
+                  },
+                  "single-name-with-country": {
+                    "summary": "Single name with country scoping",
+                    "value": {
+                      "name": "michael",
+                      "age": 58,
+                      "count": 41234,
+                      "country_id": "US"
+                    }
+                  },
+                  "single-name-null": {
+                    "summary": "Name not in dataset",
+                    "value": {
+                      "name": "xyz123",
+                      "age": null,
+                      "count": 0
+                    }
+                  },
+                  "batch-names": {
+                    "summary": "Batch name lookup",
+                    "value": [
+                      {
+                        "name": "anna",
+                        "age": 42,
+                        "count": 185234
+                      },
+                      {
+                        "name": "john",
+                        "age": 55,
+                        "count": 412789
+                      },
+                      {
+                        "name": "kim",
+                        "age": 38,
+                        "count": 67890
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Missing or invalid API key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Invalid API key."
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity. The name parameter is missing or invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Missing 'name' parameter."
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests. Monthly name lookup allowance exceeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Request limit reached. Upgrade to a paid plan for more requests."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "apiKey": {
+        "type": "apiKey",
+        "in": "query",
+        "name": "apikey",
+        "description": "API key obtained from the Agify dashboard. Shared with Genderize.io and Nationalize.io."
+      }
+    },
+    "schemas": {
+      "AgePrediction": {
+        "type": "object",
+        "description": "Age prediction result for a single name.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name as processed by the API (may differ slightly from input if diacritics were stripped).",
+            "example": "michael"
+          },
+          "age": {
+            "type": ["integer", "null"],
+            "description": "Predicted age in years. Null if the name is not in the dataset.",
+            "minimum": 0,
+            "example": 65
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of data records supporting the age prediction. A higher count indicates more reliable prediction.",
+            "minimum": 0,
+            "example": 298219
+          },
+          "country_id": {
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 country code used for scoping, if provided in the request.",
+            "pattern": "^[A-Z]{2}$",
+            "example": "US"
+          }
+        },
+        "required": ["name", "age", "count"]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "description": "Error response returned when the request cannot be processed.",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Human-readable error message describing what went wrong.",
+            "example": "Missing 'name' parameter."
+          }
+        },
+        "required": ["error"]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Age Prediction",
+      "description": "Endpoints for predicting age from first names using statistical data."
+    }
+  ]
+}
