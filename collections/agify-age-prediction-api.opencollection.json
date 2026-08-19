@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Agify Age Prediction API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Age Prediction",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Predict age from name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agify.io/",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "First name to predict age for. For a single name lookup, provide the name as a string. For batch lookups, use array syntax: name[]=anna&name[]=john (up to 10 names per request)."
+              },
+              {
+                "name": "country_id",
+                "value": "",
+                "type": "query",
+                "description": "ISO 3166-1 alpha-2 country code to scope the age prediction to a specific country. Providing a country code significantly improves prediction accuracy."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Agify API key. Shared with Genderize.io and Nationalize.io accounts."
+              }
+            ]
+          },
+          "docs": "Predicts the age of a person from their first name. Accepts a single name or up to 10 names in a batch. Optionally scopes the prediction to a specific country using an ISO 3166-1 alpha-2 country code. An API key is required for all requests."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,329 @@
+{
+  "item": [
+    {
+      "id": "862fb4d8-8010-48bd-8f66-82b54c001743",
+      "name": "Age Prediction",
+      "description": {
+        "content": "Endpoints for predicting age from first names using statistical data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c34b52b9-f173-4e3d-9340-212bbd4a17c7",
+          "name": "Predict age from name",
+          "request": {
+            "name": "Predict age from name",
+            "description": {
+              "content": "Predicts the age of a person from their first name. Accepts a single name or up to 10 names in a batch. Optionally scopes the prediction to a specific country using an ISO 3166-1 alpha-2 country code. An API key is required for all requests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) First name to predict age for. For a single name lookup, provide the name as a string. For batch lookups, use array syntax: name[]=anna&name[]=john (up to 10 names per request)."
+                },
+                {
+                  "disabled": false,
+                  "key": "country_id",
+                  "value": "<string>",
+                  "description": "ISO 3166-1 alpha-2 country code to scope the age prediction to a specific country. Providing a country code significantly improves prediction accuracy."
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "Your Agify API key. Shared with Genderize.io and Nationalize.io accounts."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ed18488c-128b-4260-96a0-632d075da1f1",
+              "name": "Successful age prediction. Returns a single object for a single name lookup, or an array of objects for batch lookups.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "michael"
+                    },
+                    {
+                      "key": "country_id",
+                      "value": "US"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Total number of name lookups allowed in the current billing period.",
+                  "key": "X-Rate-Limit-Limit",
+                  "value": "186"
+                },
+                {
+                  "disabled": false,
+                  "description": "Number of name lookups remaining in the current billing period.",
+                  "key": "X-Rate-Limit-Remaining",
+                  "value": "186"
+                },
+                {
+                  "disabled": false,
+                  "description": "Unix timestamp (seconds) when the monthly allowance resets.",
+                  "key": "X-Rate-Limit-Reset",
+                  "value": "186"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"michael\",\n  \"age\": 65,\n  \"count\": 298219\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0649b5a2-bfa0-45a2-a23e-9f35eac3832c",
+              "name": "Unauthorized. Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "michael"
+                    },
+                    {
+                      "key": "country_id",
+                      "value": "US"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Invalid API key.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02057e10-d9af-41a0-85cd-b04a05ec17b9",
+              "name": "Unprocessable Entity. The name parameter is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "michael"
+                    },
+                    {
+                      "key": "country_id",
+                      "value": "US"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Missing 'name' parameter.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c93ef43-29a2-4947-8c8a-7bee5e618db5",
+              "name": "Too Many Requests. Monthly name lookup allowance exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "michael"
+                    },
+                    {
+                      "key": "country_id",
+                      "value": "US"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Request limit reached. Upgrade to a paid plan for more requests.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.agify.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a49c7c4e-621d-423a-892e-3645463ee089",
+    "name": "Agify Age Prediction API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API that predicts the age of a person from their first name using statistical data from over 900 million records spanning 195+ countries. Provided by Demografix ApS. Shares a single API key with Genderize.io and Nationalize.io.\n\nContact Support:\n Name: Demografix ApS\n Email: info@genderize.io",
+      "type": "text/plain"
+    }
+  }
+}
