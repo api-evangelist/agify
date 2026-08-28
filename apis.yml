@@ -10,6 +10,18 @@ description: >-
   up to 10 names and optional country scoping via ISO 3166-1 alpha-2 codes.
   The API is stateless, cookieless, and GDPR compliant — submitted names are
   discarded immediately and never stored.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: open
